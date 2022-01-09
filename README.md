@@ -1,2 +1,2 @@
-#Acordeón creado con HTML, CSS y JavaScript.
+# accordion-vanilla-js
 ![Preview](preview.png)
