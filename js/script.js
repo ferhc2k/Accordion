@@ -1,20 +1,22 @@
-let item = Array.from(document.querySelectorAll(".item"));
-let allContent = Array.from(document.querySelectorAll(".content"));
+const item = [...document.querySelectorAll(".item")];
+const allContent = [...document.querySelectorAll(".content")];
+
 item.forEach((item) => {
     item.addEventListener("click", () => {
-        let content = item.querySelector(".content");
-        let icon = item.querySelector(".icon");
-        if (content.matches(".view-content")) {
-            content.classList.remove("view-content");
+        const icon = item.querySelector(".icon");
+        const content = item.querySelector(".content");
+        const { scrollHeight } = content;
+        item.style.setProperty('--max-height', `${scrollHeight}px`);
+        content.classList.add(".content-visible")
+        if (content.matches(".content-visible")) {
+            content.classList.remove("content-visible");
             icon.style.transform = "rotate(0deg)";
         } else {
-            for (let index of allContent) {
-                if (index.matches(".view-content")) {
-                    index.classList.remove("view-content");
-                    index.parentElement.querySelector(".icon").style.transform = "rotate(0deg)";
-                }
-            }
-            content.classList.add("view-content");
+            allContent.forEach(item => {
+                item.classList.remove("content-visible");
+                item.parentElement.querySelector(".icon").style.transform = "rotate(0deg)";
+            })
+            content.classList.add("content-visible");
             icon.style.transform = "rotate(45deg)";
         }
     });
